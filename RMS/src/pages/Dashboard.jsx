@@ -14,9 +14,9 @@ import Header from '../components/Header';
 
 
   return (
-<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-4 sm:py-4">
     
-    <Header title="Dashboard" username="[User Name]" lastLogin="Oct 16, 2025"/>
+    <Header title="Dashboard" username="Dong Darong" lastLogin="Oct 16, 2025"/>
     <hr className="border-gray-700 mt-4 mb-10" />
 
     
