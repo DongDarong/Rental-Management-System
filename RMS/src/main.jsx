@@ -5,13 +5,14 @@ import './index.css'
 import App from './App.jsx'
 import Dashboard from './pages/Dashboard.jsx';
 import Users from './pages/Users.jsx';
-import Units from './pages/Units.jsx';
+import Properties from './pages/Properties.jsx';
 import Tenants from './pages/Tenants.jsx';
 import Maintenance from './pages/Maintenance.jsx';
 import Payments from './pages/Payments.jsx';
 import Reports from './pages/Reports.jsx';
 import MyProfile from './pages/MyProfile.jsx';
-
+import Notifications from './pages/Notifications.jsx';
+import Contracts from './pages/Contracts.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -26,8 +27,8 @@ const router = createBrowserRouter([
         element: <Users />,
       },
       {
-        path: '/units', // The "Units" page
-        element: <Units />,
+        path: '/properties', // The "Properties" page
+        element: <Properties />,
       },
       {
         path: '/tenants', // The "Tenants" page
@@ -48,6 +49,14 @@ const router = createBrowserRouter([
       {
         path: '/myprofile', // The "MyProfile" page
         element: <MyProfile />,
+      },
+      {
+        path: '/notifications', // The "Notifications" page
+        element: <Notifications />,
+      },
+            {
+        path: '/contracts', // The "Contracts" page
+        element: <Contracts />,
       },
     ],
   },

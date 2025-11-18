@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import Header from '../components/dashboard/Header';
 import Card from '../components/dashboard/Card-PTIM';
-import ChartsGrid from '../components/dashboard/ChartsGrid';
+// import ChartsGrid from '../components/dashboard/ChartsGrid';
+// import ChartCard from '../components/dashboard/ChartCard';
  function Dashboard() {
   // const [stats, setStats] = useState({
   //   properties: 0,
@@ -17,7 +18,8 @@ import ChartsGrid from '../components/dashboard/ChartsGrid';
     <div>
       <Header title="Dashboard Overview" username="Admin User" lastLogin="2024-06-01" />
       <Card />
-      <ChartsGrid />
+      {/* <ChartCard /> */}
+      {/* <ChartsGrid /> */}
     </div>
   );
 }

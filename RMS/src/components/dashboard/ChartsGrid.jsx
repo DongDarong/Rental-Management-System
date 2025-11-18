@@ -1,45 +1,52 @@
 import React from 'react';
+// Go up one level (out of 'pages') and into 'components'
+ import ChartCard from './ChartCard'; 
+import {
+    monthlyIncomeConfig,
+    newTenantConfig,
+    propertyAvailabilityConfig,
+    occupancyRateConfig
+// Go up one level (out of 'pages') and into 'data'
+} from './chartData.js'; 
 
-  function ChartsGrid() {
+/**
+ * A component to display the grid of four charts.
+ * It imports chart configurations and passes them to ChartCard components.
+ */
+function ChartsGrid() {
+    return (
+        <div className="main-content flex-1 p-4 md:p-8 lg:p-10">
+            <div className="charts-grid grid grid-cols-1 md:grid-cols-2 gap-6">
 
-  
-return(
-  <div className="main-content flex-1 p-4 md:p-8 lg:p-10">
-  <div class="charts-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* 1. Monthly Income Report */}
+                <ChartCard
+                    title="Monthly Income Trend"
+                    chartConfig={monthlyIncomeConfig}
+                />
 
-            
-            <div class="bg-white p-6 rounded-xl shadow-xl">
-                <h3 class="text-lg font-semibold text-primary-dark mb-4 border-b pb-2">Monthly Income Trend</h3>
-                <div class="w-full h-80">
-                    <canvas id="monthlyIncomeChart"></canvas>
-                </div>
-            </div>
+                {/* 2. New Tenant Registrations */}
+                <ChartCard
+                    title="New Tenant Registrations"
+                    chartConfig={newTenantConfig}
+                />
 
-            
-            <div class="bg-white p-6 rounded-xl shadow-xl">
-                <h3 class="text-lg font-semibold text-primary-dark mb-4 border-b pb-2">New Tenant Registrations</h3>
-                <div class="w-full h-80">
-                    <canvas id="newTenantChart"></canvas>
-                </div>
-            </div>
+                {/* 3. Property Status / Availability */}
+                <ChartCard
+                    title="Property Availability"
+                    chartConfig={propertyAvailabilityConfig}
+                    // This prop overrides the default height/width for the doughnut chart
+                    containerClassName="w-full sm:w-2/3 mx-auto h-80" 
+                />
 
-            
-            <div class="bg-white p-6 rounded-xl shadow-xl md:col-span-1">
-                <h3 class="text-lg font-semibold text-primary-dark mb-4 border-b pb-2">Property Availability</h3>
-                <div class="w-2/3 mx-auto h-80">
-                    <canvas id="propertyAvailabilityChart"></canvas>
-                </div>
-            </div>
+                {/* 4. Property Performance (Occupancy Rate) */}
+                <ChartCard
+                    title="Occupancy Rate"
+                    chartConfig={occupancyRateConfig}
+                />
 
-            
-            <div class="bg-white p-6 rounded-xl shadow-xl md:col-span-1">
-                <h3 class="text-lg font-semibold text-primary-dark mb-4 border-b pb-2">Occupancy Rate</h3>
-                <div class="w-full h-80">
-                    <canvas id="occupancyRateChart"></canvas>
-                </div>
             </div>
         </div>
-        </div>
-);
+    );
 }
+
 export default ChartsGrid;
