@@ -4,6 +4,7 @@ import Drawer from "../components/properties/Drawer";
 import SearchBar from "../components/properties/SearchBar";
 import Table from "../components/properties/Table";
 import PropertyForm from "../components/properties/PropertyForm";
+import Pagination from "../components/paginations/Pagination";
 
 function Properties() {
   const [properties, setProperties] = useState([
@@ -71,6 +72,12 @@ function Properties() {
         properties={filteredProperties}
         onEdit={handleEditProperty}
         onDelete={handleDeleteProperty}
+      />
+
+      <Pagination
+        currentPage={1}
+        totalPages={5}
+        onPageChange={(page) => console.log("Change to page:", page)}
       />
 
       <Drawer
