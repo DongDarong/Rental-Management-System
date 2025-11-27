@@ -9,9 +9,9 @@ import Pagination from '../components/paginations/Pagination';
 
  function Tenants() {
   const [tenants, setTenants] = useState([
-    { id: 1,  name: "House A", type: "House", size: 120, price: 50000, status: "Available" },
-    { id: 2,  name: "Villa B", type: "Villa", size: 300, price: 150000, status: "Rented" },
-    { id: 3,  name: "Apartment C", type: "Apartment", size: 80, price: 30000, status: "Maintenance" },
+    { id: 1,  fullName: "John Doe", phone: "123-456-7890", currentRental: "House A", paymentStatus: "Paid", idCard: "ID12345" },
+    { id: 2,  fullName: "Jane Smith", phone: "987-654-3210", currentRental: "Villa B", paymentStatus: "Pending", idCard: "ID67890" },
+    { id: 3,  fullName: "Alice Johnson", phone: "555-123-4567", currentRental: "Apartment C", paymentStatus: "Overdue", idCard: "ID54321" },
   ]);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -52,9 +52,9 @@ import Pagination from '../components/paginations/Pagination';
 
   // Filter tenants based on search and status
   const filteredTenants = tenants.filter((t) => {
-    const matchesSearch = t.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          t.type.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = filterStatus ? t.status === filterStatus : true;
+    const matchesSearch = t.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          t.currentRental.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = filterStatus ? t.paymentStatus === filterStatus : true;
     return matchesSearch && matchesStatus;
   });
 
@@ -70,7 +70,7 @@ import Pagination from '../components/paginations/Pagination';
       />
 
       <Table
-        properties={filteredTenants}
+        tenants={filteredTenants}
         onEdit={handleEditTenant}
         onDelete={handleDeleteTenant}
       />
