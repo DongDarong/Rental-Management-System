@@ -1,7 +1,7 @@
 import React from "react";
 
-function Table({ properties = [], onEdit, onDelete }) {
-  const safeProperties = Array.isArray(properties) ? properties : [];
+function Table({ tenants = [], onEdit, onDelete }) {
+  const safeTenants = Array.isArray(tenants) ? tenants : [];
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -16,19 +16,19 @@ function Table({ properties = [], onEdit, onDelete }) {
                 User ID
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                Property Name
+                Full Name
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                Type
+                Phone
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                Size (m²)
+                Current Rental
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                Price ($)
+                ID Card
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                Status
+                Payment Status
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Actions
@@ -37,8 +37,8 @@ function Table({ properties = [], onEdit, onDelete }) {
           </thead>
 
           <tbody className="bg-white divide-y divide-gray-200">
-            {safeProperties.length > 0 ? (
-              safeProperties.map((item, index) => (
+            {safeTenants.length > 0 ? (
+              safeTenants.map((item, index) => (
                 <tr
                   key={item.id}
                   className="hover:bg-gray-50 transition-colors"
@@ -50,30 +50,30 @@ function Table({ properties = [], onEdit, onDelete }) {
                     {item.id}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {item.name}
+                    {item.fullName}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.type}
+                    {item.phone}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {item.size}
+                    {item.currentRental}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-teal-600">
-                    {item.price}
+                    {item.idCard}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <span
                       className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        item.status === "Available"
+                        item.paymentStatus === "Paid"
                           ? "bg-green-100 text-green-800"
-                          : item.status === "Rented"
+                          : item.paymentStatus === "Pending"
                           ? "bg-blue-100 text-blue-800"
-                          : item.status === "Maintenance"
+                          : item.paymentStatus === "Overdue"
                           ? "bg-yellow-100 text-yellow-800"
                           : "bg-gray-100 text-gray-800"
                       }`}
                     >
-                      {item.status}
+                      {item.paymentStatus}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-4">

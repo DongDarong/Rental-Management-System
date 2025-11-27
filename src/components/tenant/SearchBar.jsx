@@ -38,9 +38,9 @@ function SearchBar({ searchTerm, onSearchChange, filterStatus, onFilterChange })
             className="block w-full sm:w-auto pl-3 pr-10 py-3 text-base border-none focus:outline-none focus:ring-0 bg-transparent text-gray-700 sm:text-sm rounded-md"
           >
             <option value="">Filter by Status</option>
-            <option value="Available">Available</option>
-            <option value="Rented">Rented</option>
-            <option value="Maintenance">Maintenance</option>
+            <option value="Paid">Paid</option>
+            <option value="Pending">Pending</option>
+            <option value="Overdue">Overdue</option>
           </select>
         </div>
       </div>
