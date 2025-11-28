@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Header from '../components/tenant/Header';
+import Header from '../components/tenant/TenantHeader';
 import SearchBar from '../components/tenant/SearchBar';
 import Table from '../components/tenant/TenantTable'; // Updated import name
 import Drawer from '../components/Drawer';
