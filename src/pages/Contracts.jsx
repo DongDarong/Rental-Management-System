@@ -5,10 +5,11 @@ import ContractRow from '../components/contracts/ContractRow';
 import ContractForm from '../components/contracts/ContractForm';
 import ContractDetailsModal from '../components/contracts/ContractDetailsModal';
 import Pagination from '../components/paginations/Pagination';
-import Drawer from '../components/Drawer';
-import AlertModal from '../components/AlertModal';
-import SuccessModal from '../components/SuccessModal';
-import ErrorModal from '../components/ErrorModal';
+import Drawer from '../components/modals/Drawer';
+import AlertModal from '../components/modals/AlertModal';
+import SuccessModal from '../components/modals/SuccessModal';
+import ErrorModal from '../components/modals/ErrorModal';
+import LoadingModal from '../components/modals/LoadingModal';
 
 function Contracts() {
   // 1. DATA STATE (Mock Data)
@@ -38,6 +39,9 @@ function Contracts() {
   // 3. DRAWER STATE
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [editingContract, setEditingContract] = useState(null);
+
+  // LOADING MODAL STATE
+  const [isLoading, setIsLoading] = useState(false);
 
   // --- HANDLERS ---
   const handleClearFilters = () => {
@@ -86,6 +90,19 @@ function Contracts() {
     }
     setIsDrawerOpen(false);
     setShowSuccess(true);
+    setIsLoading(true);
+
+        setTimeout(() => {
+        if (editingContract) {
+            // Update logic...
+        } else {
+            // Add logic...
+        }
+        
+        setIsLoading(false); // <--- STOP LOADING
+        closeDrawer();
+        setShowSuccess(true);
+    }, 1000);
   };
 
   // --- LOGIC ---
@@ -182,6 +199,8 @@ function Contracts() {
         message={errorMessage}
         buttonText="Fix It"
       />
+      {/* Loading Modal */}
+      <LoadingModal isOpen={isLoading} />
     </div>
   );
 }

@@ -3,12 +3,12 @@ import MaintenanceHeader from '../components/maintenance/MaintenanceHeader';
 import FiltersSection from '../components/maintenance/FiltersSection';
 import MaintenanceTable from '../components/maintenance/MaintenanceTable';
 import Pagination from '../components/paginations/Pagination';
-import Drawer from '../components/Drawer';
+import Drawer from '../components/modals/Drawer';
 import MaintenanceForm from '../components/maintenance/MaintenanceForm'; 
-import AlertModal from '../components/AlertModal';
-import SuccessModal from '../components/SuccessModal';
-import ErrorModal from '../components/ErrorModal';
-
+import AlertModal from '../components/modals/AlertModal';
+import SuccessModal from '../components/modals/SuccessModal';
+import ErrorModal from '../components/modals/ErrorModal';
+import LoadingModal from '../components/modals/LoadingModal';
 function Maintenance() {
   // 1. DATA STATE (Mock Data)
   const [requests, setRequests] = useState([
@@ -21,11 +21,11 @@ function Maintenance() {
   // ALERT MODAL STATE
   const [alertOpen, setAlertOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
-  // Add State for Success Modal
   const [showSuccess, setShowSuccess] = useState(false);
-  // Add State for Error Modal
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   // 2. FILTER & DRAWER STATE
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
@@ -79,6 +79,19 @@ const handleDeleteClick = (id) => {
     }
   setIsDrawerOpen(false);
   setShowSuccess(true);
+      setIsLoading(true);
+
+        setTimeout(() => {
+        if (editingRequest) {
+            // Update logic...
+        } else {
+            // Add logic...
+        }
+        
+        setIsLoading(false); // <--- STOP LOADING
+        closeDrawer();
+        setShowSuccess(true);
+    }, 1000);
 };
 
   // --- FILTERING LOGIC ---
@@ -158,6 +171,8 @@ const handleDeleteClick = (id) => {
         message={errorMessage}
         buttonText="Fix It"
       />
+      {/* Loading Modal */}
+      <LoadingModal isOpen={isLoading} />
     </div>
   );
 }

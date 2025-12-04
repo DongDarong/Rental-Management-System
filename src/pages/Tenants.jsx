@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react';
 import Header from '../components/tenant/TenantHeader';
 import SearchBar from '../components/tenant/SearchBar';
 import Table from '../components/tenant/TenantTable';
-import Drawer from '../components/Drawer';
+import Drawer from '../components/modals/Drawer';
 import TenantForm from '../components/tenant/TenantForm';
 import Pagination from '../components/paginations/Pagination';
 
 // 1. IMPORT MODALS
-import AlertModal from '../components/AlertModal';
-import SuccessModal from '../components/SuccessModal';
-import ErrorModal from '../components/ErrorModal';
+import AlertModal from '../components/modals/AlertModal';
+import SuccessModal from '../components/modals/SuccessModal';
+import ErrorModal from '../components/modals/ErrorModal';
+import LoadingModal from '../components/modals/LoadingModal';
 
 function Tenants() {
   // Mock Data
@@ -84,11 +85,10 @@ function Tenants() {
   // 2. MODAL STATES
   const [alertOpen, setAlertOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
-  
   const [showSuccess, setShowSuccess] = useState(false);
-  
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // --- HANDLERS ---
 
@@ -127,8 +127,20 @@ function Tenants() {
     }
     
     closeDrawer();
-    // 4. TRIGGER SUCCESS MODAL
     setShowSuccess(true);
+    setIsLoading(true);
+
+        setTimeout(() => {
+        if (editingTenant) {
+            // Update logic...
+        } else {
+            // Add logic...
+        }
+        
+        setIsLoading(false); // <--- STOP LOADING
+        closeDrawer();
+        setShowSuccess(true);
+    }, 1000);
   };
 
   // 5. DELETE FLOW (Triggers AlertModal)
@@ -236,6 +248,8 @@ function Tenants() {
         message={errorMessage}
         buttonText="Okay, I'll fix it"
       />
+      {/* Loading Modal */}
+      <LoadingModal isOpen={isLoading} />
     </div>
   );
 }

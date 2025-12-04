@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import Header from "../components/properties/PropertiesHeader";
-import Drawer from "../components/Drawer";
+import Drawer from "../components/modals/Drawer";
 import SearchBar from "../components/properties/SearchBar";
 import Table from "../components/properties/Table";
 import PropertyForm from "../components/properties/PropertyForm";
 import Pagination from "../components/paginations/Pagination";
 
 // 1. IMPORT MODALS
-import AlertModal from '../components/AlertModal';
-import SuccessModal from '../components/SuccessModal';
-import ErrorModal from '../components/ErrorModal';
+import AlertModal from '../components/modals/AlertModal';
+import SuccessModal from '../components/modals/SuccessModal';
+import ErrorModal from '../components/modals/ErrorModal';
+import LoadingModal from "../components/modals/LoadingModal";
 
 function Properties() {
   // Mock Data
@@ -36,12 +37,10 @@ function Properties() {
   // 2. MODAL STATES
   const [alertOpen, setAlertOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
-  
   const [showSuccess, setShowSuccess] = useState(false);
-  
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   // --- HANDLERS ---
 
   const openDrawer = () => setIsDrawerOpen(true);
@@ -67,9 +66,23 @@ function Properties() {
       const newProperty = { id: Date.now(), ...propertyData };
       setProperties((prev) => [newProperty, ...prev]); // Add to top
     }
-    
+
     closeDrawer();
     setShowSuccess(true); // Trigger Success
+    setIsLoading(true);
+
+        setTimeout(() => {
+        if (editingProperty) {
+            // Update logic...
+        } else {
+            // Add logic...
+        }
+        
+        setIsLoading(false); // <--- STOP LOADING
+        closeDrawer();
+        setShowSuccess(true);
+    }, 1000);
+
   };
 
   // 4. DELETE LOGIC
@@ -173,6 +186,9 @@ function Properties() {
         message={errorMessage}
         buttonText="Fix It"
       />
+
+      {/* Loading Modal */}
+      <LoadingModal isOpen={isLoading} />
     </div>
   );
 }

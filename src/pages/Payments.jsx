@@ -5,12 +5,13 @@ import FiltersSection from '../components/payments/FiltersSection';
 import PaymentForm from '../components/payments/PaymentForm';
 import PaymentTable from '../components/payments/PaymentTable';
 import Pagination from '../components/paginations/Pagination';
-import Drawer from '../components/Drawer';
+import Drawer from '../components/modals/Drawer';
 
 // 1. IMPORT MODALS
-import AlertModal from '../components/AlertModal';
-import SuccessModal from '../components/SuccessModal';
-import ErrorModal from '../components/ErrorModal';
+import AlertModal from '../components/modals/AlertModal';
+import SuccessModal from '../components/modals/SuccessModal';
+import ErrorModal from '../components/modals/ErrorModal';
+import LoadingModal from '../components/modals/LoadingModal';
 
 function Payments() {
   // 1. DATA STATE (Mock Data)
@@ -39,11 +40,10 @@ function Payments() {
   // 5. MODAL STATES
   const [alertOpen, setAlertOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
-  
   const [showSuccess, setShowSuccess] = useState(false);
-  
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // --- HANDLERS ---
 
@@ -107,7 +107,20 @@ function Payments() {
     
     // 3. Cleanup & Success Feedback
     closeDrawer();
-    setShowSuccess(true); // Trigger Success Modal
+    setShowSuccess(true);
+        setIsLoading(true);
+
+        setTimeout(() => {
+        if (editingPayment) {
+            // Update logic...
+        } else {
+            // Add logic...
+        }
+        
+        setIsLoading(false); // <--- STOP LOADING
+        closeDrawer();
+        setShowSuccess(true);
+    }, 1000);
   };
 
   // --- FILTERING LOGIC ---
@@ -199,6 +212,8 @@ function Payments() {
         message={errorMessage}
         buttonText="Okay, I'll fix it"
       />
+      {/* Loading Modal */}
+      <LoadingModal isOpen={isLoading} />
     </div>
   );
 }
