@@ -5,7 +5,7 @@ import autoTable from 'jspdf-autotable';
 import ReportHeader from '../components/reports/ReportHeader';
 import SummaryCards from '../components/reports/SummaryCards';
 import ReportTable from '../components/reports/ReportTable';
-import LoadingModal from '../components/modals/LoadingModal'; // 1. Import LoadingModal
+import LoadingModal from '../components/modals/LoadingModal';
 
 function Reports() {
   // 1. STATE FOR LOADING
