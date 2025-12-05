@@ -1,13 +1,16 @@
 // src/pages/Payments.jsx
 import { useState, useEffect } from 'react';
+
+// Import Components
 import PaymentHeader from '../components/payments/PaymentHeader';
 import FiltersSection from '../components/payments/FiltersSection';
 import PaymentForm from '../components/payments/PaymentForm';
 import PaymentTable from '../components/payments/PaymentTable';
-import Pagination from '../components/paginations/Pagination';
-import Drawer from '../components/modals/Drawer';
+import Layout from '../components/Layout';
 
 // 1. IMPORT MODALS
+import Pagination from '../components/paginations/Pagination';
+import Drawer from '../components/modals/Drawer';
 import AlertModal from '../components/modals/AlertModal';
 import SuccessModal from '../components/modals/SuccessModal';
 import ErrorModal from '../components/modals/ErrorModal';
@@ -147,7 +150,8 @@ function Payments() {
   const totalPages = Math.ceil(filteredPayments.length / itemsPerPage);
 
   return (
-    <div className="p-4 space-y-4">
+    <div>
+      <Layout>
       <PaymentHeader onOpenDrawer={handleAdd} />
       
       <FiltersSection 
@@ -214,6 +218,7 @@ function Payments() {
       />
       {/* Loading Modal */}
       <LoadingModal isOpen={isLoading} />
+      </Layout>
     </div>
   );
 }

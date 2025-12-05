@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-// 1. IMPORT PDF LIBRARIES
+// IMPORT PDF LIBRARIES
 import { jsPDF } from "jspdf";
 import autoTable from 'jspdf-autotable';
 
+// IMPORT LAYOUT AND COMPONENTS
 import UsersHeader from '../components/users/UserHeader';
 import UsersSearchBar from '../components/users/UserSearchBar';
 import UsersTable from '../components/users/UserTable';
 import UserForm from '../components/users/UserForm';
+import Layout from '../components/Layout';
 
-// 2. IMPORT PAGINATION AND MODALS
+// IMPORT PAGINATION AND MODALS
 import Pagination from "../components/paginations/Pagination";
 import Drawer from "../components/modals/Drawer";
 import AlertModal from '../components/modals/AlertModal';
@@ -178,7 +180,8 @@ function Users() {
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div>
+      <Layout>
       <UsersHeader
         onAddUser={handleAddUser}
         onDownloadReport={handleDownloadReport}
@@ -242,6 +245,7 @@ function Users() {
         isOpen={isLoading}
         message={loadingMessage || "Processing..."}
       />
+      </Layout>
     </div>
   );
 }

@@ -45,7 +45,7 @@ const LogoutIcon = (props) => (
 // --- Navigation Items Array ---
 // This makes the sidebar much easier to manage
 const navItems = [
-  { to: "/", label: "Dashboard", icon: <HomeIcon /> },
+  { to: "/dashboard", label: "Dashboard", icon: <HomeIcon /> },
   { to: "/properties", label: "Properties", icon: <HomeIcon /> },
   { to: "/tenants", label: "Tenants", icon: <TenantsIcon /> },
   { to: "/payments", label: "Payments", icon: <PaymentIcon /> },

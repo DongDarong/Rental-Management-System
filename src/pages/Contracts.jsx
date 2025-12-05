@@ -1,9 +1,14 @@
 import { useState } from 'react';
+
+// Import Components
 import ContractHeader from '../components/contracts/ContractHeader';
 import ContractFilters from '../components/contracts/ContractFilters';
 import ContractRow from '../components/contracts/ContractRow';
 import ContractForm from '../components/contracts/ContractForm';
 import ContractDetailsModal from '../components/contracts/ContractDetailsModal';
+import Layout from '../components/Layout';
+
+// Import Modals and Pagination
 import Pagination from '../components/paginations/Pagination';
 import Drawer from '../components/modals/Drawer';
 import AlertModal from '../components/modals/AlertModal';
@@ -119,7 +124,8 @@ function Contracts() {
   const totalPages = Math.ceil(filteredContracts.length / itemsPerPage);
 
   return (
-    <div className="p-4 space-y-4">
+    <div>
+      <Layout>
       <ContractHeader onOpenDrawer={handleAdd} />
       
       <ContractFilters 
@@ -201,6 +207,7 @@ function Contracts() {
       />
       {/* Loading Modal */}
       <LoadingModal isOpen={isLoading} />
+      </Layout>
     </div>
   );
 }

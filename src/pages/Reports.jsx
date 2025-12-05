@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { jsPDF } from "jspdf";
 import autoTable from 'jspdf-autotable';
 
+// IMPORT LAYOUT AND COMPONENTS
+import Layout from '../components/Layout';
 import ReportHeader from '../components/reports/ReportHeader';
 import SummaryCards from '../components/reports/SummaryCards';
 import ReportTable from '../components/reports/ReportTable';
+
+// IMPORT MODALS
 import LoadingModal from '../components/modals/LoadingModal';
 
 function Reports() {
@@ -92,7 +96,8 @@ function Reports() {
   };
 
   return (
-    <div className="p-4 space-y-6">
+    <div>
+      <Layout>
       <ReportHeader onDownload={handleDownloadPDF} />
 
       <div>
@@ -107,6 +112,7 @@ function Reports() {
         isOpen={isLoading} 
         message="Generating Report..." 
       />
+      </Layout>
     </div>
   );
 }

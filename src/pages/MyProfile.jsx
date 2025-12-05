@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import ProfileHeader from '../components/profile/ProfileHeader';
 
-// Import New Components
+// Import Components
+import ProfileHeader from '../components/profile/ProfileHeader';
 import AccountInformation from '../components/profile/AccountInformation';
 import DisplaySettings from '../components/profile/DisplaySettings';
 import ChangePassword from '../components/profile/ChangePassword';
+import Layout from '../components/Layout';
 
 // Import Modals
 import SuccessModal from '../components/modals/SuccessModal';
@@ -87,7 +88,8 @@ function Profile() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div>
+      <Layout>
       <ProfileHeader />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -132,6 +134,7 @@ function Profile() {
         title="Action Failed"
         message={errorMessage}
       />
+      </Layout>
     </div>
   );
 }

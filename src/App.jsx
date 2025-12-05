@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Layout from './components/Layout'
+// import Layout from './components/Layout'
 import { Outlet } from 'react-router-dom';
 
 
@@ -8,11 +8,12 @@ function App() {
 
   return (
     <div >
-      <Layout >
-        <Outlet >
+      {/* <Layout >
+
+      </Layout> */}
+      <Outlet >
 
       </Outlet>
-      </Layout>
 
     </div>
   )

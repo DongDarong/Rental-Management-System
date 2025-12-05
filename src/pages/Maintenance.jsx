@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
+
+// Import Components
 import MaintenanceHeader from '../components/maintenance/MaintenanceHeader';
 import FiltersSection from '../components/maintenance/FiltersSection';
 import MaintenanceTable from '../components/maintenance/MaintenanceTable';
+import MaintenanceForm from '../components/maintenance/MaintenanceForm'; 
+import Layout from '../components/Layout';
+
+// Import Modals and Pagination
 import Pagination from '../components/paginations/Pagination';
 import Drawer from '../components/modals/Drawer';
-import MaintenanceForm from '../components/maintenance/MaintenanceForm'; 
 import AlertModal from '../components/modals/AlertModal';
 import SuccessModal from '../components/modals/SuccessModal';
 import ErrorModal from '../components/modals/ErrorModal';
@@ -111,7 +116,8 @@ const handleDeleteClick = (id) => {
   const totalPages = Math.ceil(filteredRequests.length / itemsPerPage);
 
   return (
-    <div className="p-4 space-y-4">
+    <div>
+      <Layout>
       <MaintenanceHeader onOpenDrawer={handleAdd} />
       
       <FiltersSection
@@ -173,6 +179,7 @@ const handleDeleteClick = (id) => {
       />
       {/* Loading Modal */}
       <LoadingModal isOpen={isLoading} />
+      </Layout>
     </div>
   );
 }

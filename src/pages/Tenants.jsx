@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
+
+// IMPORT LAYOUT AND COMPONENTS
 import Header from '../components/tenant/TenantHeader';
 import SearchBar from '../components/tenant/SearchBar';
 import Table from '../components/tenant/TenantTable';
 import Drawer from '../components/modals/Drawer';
 import TenantForm from '../components/tenant/TenantForm';
-import Pagination from '../components/paginations/Pagination';
+import Layout from '../components/Layout';
 
-// 1. IMPORT MODALS
+// IMPORT MODALS
+import Pagination from '../components/paginations/Pagination';
 import AlertModal from '../components/modals/AlertModal';
 import SuccessModal from '../components/modals/SuccessModal';
 import ErrorModal from '../components/modals/ErrorModal';
@@ -185,7 +188,8 @@ function Tenants() {
   const totalPages = Math.ceil(filteredTenants.length / itemsPerPage);
 
   return (
-    <div className="p-4 space-y-4">
+    <div>
+      <Layout>
       <Header onOpenDrawer={openDrawer} />
 
       <SearchBar
@@ -250,6 +254,7 @@ function Tenants() {
       />
       {/* Loading Modal */}
       <LoadingModal isOpen={isLoading} />
+      </Layout>
     </div>
   );
 }

@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+
+// IMPORT COMPONENTS
 import Header from "../components/properties/PropertiesHeader";
 import Drawer from "../components/modals/Drawer";
 import SearchBar from "../components/properties/SearchBar";
 import Table from "../components/properties/Table";
 import PropertyForm from "../components/properties/PropertyForm";
-import Pagination from "../components/paginations/Pagination";
+import Layout from "../components/Layout";
 
 // IMPORT MODALS
+import Pagination from "../components/paginations/Pagination";
 import AlertModal from '../components/modals/AlertModal';
 import SuccessModal from '../components/modals/SuccessModal';
 import ErrorModal from '../components/modals/ErrorModal';
@@ -125,7 +128,8 @@ function Properties() {
   const totalPages = Math.ceil(filteredProperties.length / itemsPerPage);
 
   return (
-    <div className="p-4 space-y-4">
+    <div>
+      <Layout>
       <Header onOpenDrawer={openDrawer} />
 
       <SearchBar
@@ -189,6 +193,7 @@ function Properties() {
 
       {/* Loading Modal */}
       <LoadingModal isOpen={isLoading} />
+      </Layout>
     </div>
   );
 }
