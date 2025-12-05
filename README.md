@@ -4,37 +4,38 @@ A modern, responsive web application built with **React** and **Vite** for manag
 
 ## 🚀 Features
 
-* **📊 Dashboard:** Overview of total properties, tenants, and financial summaries.
-* **🏢 Properties:** Add, edit, delete, and list rental units (Apartments, Houses, etc.).
-* **👥 Tenants:** Manage tenant profiles, contact info, and upload/view ID cards.
-* **📝 Contracts:** Create lease agreements, view terms, and **generate/download PDF contracts**.
-* **💰 Payments:** Track rent payments, filter by status (Paid, Pending, Overdue), and date.
-* **🔔 Notifications:** System alerts and updates.
-* **🛠️ Maintenance:** Create and manage maintenance requests, set priorities and statuses, filter/search requests, and view request history.
-* **📱 Responsive Design:** Fully optimized for Desktop, Tablet, and Mobile devices.
+* **📊 Dashboard:** Overview of total properties, tenants, vacancies, and financial summaries.
+* **🏢 Properties:** Add, edit, delete, and list rental units (Apartments, Houses, Villas, etc.).
+* **👥 Tenants:** Manage tenant profiles, contact info, rental history, and ID card attachments.
+* **📝 Contracts:** Create lease agreements, track duration, and **generate/download PDF contracts**.
+* **💰 Payments:** Track rent payments, filter by status (Paid, Pending, Overdue), and date ranges.
+* **🛠️ Maintenance:** Create and manage maintenance requests, set priorities, and track resolution status.
+* **📈 Reports:** View annual financial summaries, monthly breakdowns, and **download PDF reports**.
+* **🔐 User Management:** Manage system users, view roles (Admin, Tenant), and access rights.
+* **⚙️ Profile & Settings:** Update account details, change passwords securely, and toggle **Dark/Light mode**.
+* **🔔 Notifications:** System alerts for overdue payments or expiring contracts.
+* **📱 Responsive Design:** Fully optimized layout for Desktop, Tablet, and Mobile devices.
 
 ## 🛠️ Tech Stack
 
 * **Framework:** [React.js](https://reactjs.org/)
 * **Build Tool:** [Vite](https://vitejs.dev/)
 * **Styling:** Tailwind CSS
-* **PDF Generation:** jsPDF
+* **PDF Generation:** jsPDF & jspdf-autotable
 * **Icons:** Heroicons / SVG
-* **Routing:** React Router (implied)
+* **Routing:** React Router
 
 ## 🚦 Getting Started / Installation
 
-Follow these steps to run the project locally. Commands are shown for Windows PowerShell (use the same commands on macOS/Linux shells without the PowerShell-specific notes).
+Follow these steps to run the project locally.
 
-Prerequisites:
+**Prerequisites:**
 - Node.js 16+ (Node 18+ recommended)
 - npm (bundled with Node) or Yarn
 
-Quick start (PowerShell):
-
-```powershell
-# Clone the repository (replace <repo-url> with your repo)
-git clone <repo_url>
+**1. Clone the repository**
+```bash
+git clone <your-repo-url>
 cd Rental-Management-System
 
 # Install dependencies
@@ -65,20 +66,24 @@ RENTAL-MANAGEMENT-SYSTEM
 ├── src/
 │   ├── assets/         # Images and icons
 │   ├── components/     # Reusable UI components
-│   │   ├── contracts/  # Contract tables, forms, modals
+│   │   ├── contracts/  # Contract tables, forms, PDF logic
 │   │   ├── dashboard/  # Dashboard widgets
+│   │   ├── maintenance/# Maintenance requests, forms, and tables
+│   │   ├── modals/     # Shared Modals (Alert, Success, Error, Loading)
 │   │   ├── notifications/
 │   │   ├── paginations/# Shared pagination component
 │   │   ├── payments/   # Payment tracking components
+│   │   ├── profile/    # Account settings, password forms
 │   │   ├── properties/ # Property management components
+│   │   ├── reports/    # Financial summaries and PDF export
 │   │   ├── tenant/     # Tenant forms and tables
-│   │   ├── maintenance/ # Maintenance requests, forms and tables
+│   │   ├── users/      # User management tables and forms
 │   │   ├── Drawer.jsx  # Slide-out sidebar for forms
 │   │   ├── Layout.jsx  # Main page layout wrapper
 │   │   └── Sidebar.jsx # Navigation sidebar
-│   ├── pages/          # Main view pages (Tenants, Payments, etc.)
+│   ├── pages/          # Main view pages (Tenants, Payments, Reports, etc.)
 │   ├── utils/          # Helper functions (e.g., PDF generator)
-│   ├── App.jsx         # Main application entry
+│   ├── App.jsx         # Main application entry and Routing
 │   └── main.jsx        # DOM rendering
 ├── .gitignore
 ├── eslint.config.js    # Linting configuration
