@@ -6,7 +6,7 @@ import Table from "../components/properties/Table";
 import PropertyForm from "../components/properties/PropertyForm";
 import Pagination from "../components/paginations/Pagination";
 
-// 1. IMPORT MODALS
+// IMPORT MODALS
 import AlertModal from '../components/modals/AlertModal';
 import SuccessModal from '../components/modals/SuccessModal';
 import ErrorModal from '../components/modals/ErrorModal';
