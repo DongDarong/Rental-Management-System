@@ -40,14 +40,14 @@ function Login() {
       setIsLoading(false);
 
       // Hardcoded check for demonstration
-      if (email === "admin@mgmt.com" && password === "password123") {
+      if (email === "admin@gmail.com" && password === "password123") {
         setShowSuccess(true);
         // Navigate after a brief success message
         setTimeout(() => {
           navigate("/dashboard"); // Redirect to Dashboard
         }, 1500);
       } else {
-        setErrorMessage("Invalid email or password. Try 'admin@mgmt.com' / 'password123'");
+        setErrorMessage("Invalid email or password. Try again.");
         setShowError(true);
       }
     }, 1500);

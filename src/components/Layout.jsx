@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-// We need to import Link and useLocation from react-router-dom
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-// --- Icon Components (All in one file) ---
-// Base Icon helper component
+// 1. IMPORT MODALS
+import AlertModal from './modals/AlertModal';
+import LoadingModal from './modals/LoadingModal';
+
+// --- Icon Components ---
 const Icon = ({ children, ...props }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
-    className="h-5 w-5 flex-shrink-0" // Added flex-shrink-0
+    className="h-5 w-5 flex-shrink-0"
     viewBox="0 0 20 20" 
     fill="currentColor" 
     {...props}
@@ -46,7 +48,7 @@ const LogoutIcon = (props) => (
 
 // --- Navigation Items Array ---
 const navItems = [
-  { to: "/", label: "Dashboard", icon: <HomeIcon /> },
+  { to: "/dashboard", label: "Dashboard", icon: <HomeIcon /> },
   { to: "/properties", label: "Properties", icon: <HomeIcon /> },
   { to: "/tenants", label: "Tenants", icon: <TenantsIcon /> },
   { to: "/payments", label: "Payments", icon: <PaymentIcon /> },
@@ -57,10 +59,33 @@ const navItems = [
   { to: "/myprofile", label: "Profile & Settings", icon: <SettingsIcon /> },
 ];
 
-// --- Sidebar Component (Now inside Layout.jsx) ---
+// --- Sidebar Component ---
 function Sidebar({ isOpen = false, onClose = () => {} }) {
   const mobileClasses = isOpen ? 'fixed inset-0 z-40 flex' : 'hidden sm:flex';
-  const location = useLocation(); // Hook to check the current path
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // 2. MODAL STATE
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // 3. LOGOUT HANDLERS
+  const handleLogoutClick = () => {
+    setAlertOpen(true); // Open the question modal
+  };
+
+  const confirmLogout = () => {
+    setIsLoading(true); // Show loading spinner
+
+    // Simulate a brief delay for smoother UX
+    setTimeout(() => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        
+        setIsLoading(false);
+        navigate("/"); // Redirect to Login page
+    }, 1000);
+  };
 
   return (
     <>
@@ -74,7 +99,6 @@ function Sidebar({ isOpen = false, onClose = () => {} }) {
       )}
 
       {/* Sidebar Container */}
-      {/* Added z-40 to ensure it's above the overlay */}
       <div className={`${mobileClasses} fixed flex-col gap-2 p-4 bg-gray-800 text-white sm:h-screen w-full sm:w-56 z-40`}>
         {/* Mobile close button */}
         {isOpen && (
@@ -103,7 +127,7 @@ function Sidebar({ isOpen = false, onClose = () => {} }) {
               <Link
                 key={item.label}
                 to={item.to}
-                onClick={onClose} // Close sidebar on mobile nav click
+                onClick={onClose}
                 className={`
                   flex items-center gap-3 text-white font-semibold p-3 rounded-md transition-colors
                   ${isActive ? 'bg-gray-700' : 'hover:bg-gray-700'}
@@ -118,41 +142,56 @@ function Sidebar({ isOpen = false, onClose = () => {} }) {
         
         {/* Logout Button */}
         <div className="border-t border-gray-700 pt-4 mt-auto w-full">
-          <button className="button text-white font-semibold p-3 rounded-md hover:bg-gray-700 bg-gray-900 transition-colors w-full flex items-center gap-3">
+          <button 
+            onClick={handleLogoutClick} // Trigger the Modal
+            className="button text-white font-semibold p-3 rounded-md hover:bg-gray-700 bg-gray-900 transition-colors w-full flex items-center gap-3"
+          >
             <LogoutIcon />
             <span>Logout</span>
           </button>
         </div>
       </div>
+
+      {/* 4. RENDER MODALS */}
+      <AlertModal
+        isOpen={alertOpen}
+        onClose={() => setAlertOpen(false)}
+        onConfirm={confirmLogout}
+        title="Log Out?"
+        message="Are you sure you want to log out of your account?"
+        confirmText="Yes, Log Out"
+        type="danger" // Red button
+      />
+
+      <LoadingModal
+        isOpen={isLoading}
+        message="Logging out..."
+      />
     </>
   );
 }
 
-// --- Layout Component (Your original code) ---
+// --- Layout Component ---
 function Layout({ children }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    // Set min-h-screen on the outer layout wrapper
     <div className="app-layout flex flex-col sm:flex-row min-h-screen">
       <Sidebar isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
-      {/* Content wrapper handles the sidebar margin */}
-      <div className="flex-1 flex flex-col sm:ml-56"> {/* <-- FIX 1: Changed sm:ml-48 to sm:ml-56 */}
+      <div className="flex-1 flex flex-col sm:ml-56"> 
         
-        {/* Mobile-only header with hamburger button */}
+        {/* Mobile-only header */}
         <div className="sm:hidden p-4 bg-white shadow-md flex items-center">
           <button
             aria-label="Open menu"
             onClick={() => setMobileOpen(true)}
-            className="p-2 rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer" // <-- FIX 2: Cleaner styling
+            className="p-2 rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          {/* You could add a page title here if needed */}
-          {/* <h1 className="text-lg font-semibold ml-3">Dashboard</h1> */}
         </div>
 
         {/* Page content */}
